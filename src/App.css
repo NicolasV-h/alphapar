@@ -1,6 +1,12 @@
 .App {
   text-align: center;
 }
+body{
+  height: 100vh;
+}
+#root, .App{
+  height: 100%;
+}
 
 .App-logo {
   height: 40vmin;
@@ -35,4 +41,93 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.is-danger{
+  color: red;
+}
+
+nav{
+  background-color: #2bbbad;
+}
+
+
+.nav-link{
+  color: white!important;
+  text-decoration: none;
+}
+
+.active{
+  text-decoration: underline;
+}
+
+nav img{
+  width: 150px;
+}
+
+.home{
+  background: url("./assets/homeBackground.jpg") no-repeat center center fixed;
+  height: calc(100% - 100px);
+  filter: blur(3px);
+  background-size: cover;
+}
+
+.home > div {
+  filter: blur(0px);
+}
+
+.homeText{
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 1px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+
+.homeButtons{
+  position: absolute;
+  top: 70%;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.btn-basic{
+  display: block;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: #2bbbad;
+  width: 250px;
+  height: 70px;
+  border-radius: 30px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  background-size: 100% 100%;
+  margin-bottom: 15px;
+  color: white;
+}
+.btn-basic-sm{
+  width: 200px;
+  height: 50px;
+  font-size: 1.2rem;
+}
+
+.homeButtons button:hover{
+  transition: all .3s;
+  background-color: transparent;
+  border: #2bbbad solid 2px;
+}
+
+.add-client{
+  transition: all .5s;
 }

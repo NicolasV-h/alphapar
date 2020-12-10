@@ -1,25 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import Header from "./Header";
+import React from "react";
+import {BrowserRouter} from "react-router-dom";
+import {ProvideAuth} from "./UserContext";
+import MainRouter from "./MainRouter";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+    return (
+        <div className='App'>
+            <ProvideAuth>
+                <BrowserRouter>
+                    <Header/>
+                    <MainRouter/>
+                </BrowserRouter>
+            </ProvideAuth>
+        </div>
+    );
 }
 
 export default App;
