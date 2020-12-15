@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import {makeStyles} from "@material-ui/core/styles";
 import {useHistory} from "react-router-dom";
 import {useAuth} from "../UserContext";
+import axios from "axios";
 
 export default function OtpVerification(props){
 
@@ -39,15 +40,31 @@ export default function OtpVerification(props){
 
     const classes = useStyles();
 
-    const verifyUser = () =>{
-        auth.signin(props.email, props.password);
+    const verifyUser = (e) =>{
+        e.preventDefault();
+
+        let bodyFormData = new FormData();
+        bodyFormData.append('username', props.email);
+        bodyFormData.append('password', props.password);
+        bodyFormData.append('totp_token', code);
+        axios.post('http://localhost:8000/token', bodyFormData)
+            .then(response => {
+                if(response.data.access_token !== null){
+                    localStorage.setItem('user_token', response.data.access_token);
+                    history.push('/')
+                }
+            })
+            .catch(error => {
+                console.log(error.response)
+            });
+        console.log("verifyUser")
+        //auth.signin(props.email, props.password);
     };
 
     const ShowQRCode = () =>{
-        console.log(props.type)
-        if(props.type === "register"){
+        if(props.type === "register" && props.urlQRCode !== ''){
             return (
-                <QRCode value="otpauth://totp/Alphapar:jul%40lesang.fr?secret=IL5JIXNKISNWSICU&issuer=Alphapar" className={"mt-5"}></QRCode>
+                <QRCode value={props.urlQRCode} className={"mt-5"}></QRCode>
             );
         }else{
             return <></>
@@ -66,7 +83,7 @@ export default function OtpVerification(props){
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} noValidate onSubmit={verifyUser}>
                         <TextField
                             variant="outlined"
                             margin="normal"

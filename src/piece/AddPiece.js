@@ -8,7 +8,7 @@ import useForm from "../assets/useForm";
 import validate from "../assets/LoginFormValidationRules";
 import axios from "axios";
 
-export default function AddClient() {
+export default function AddPiece(){
 
     const useStyles = makeStyles((theme) => ({
         paper: {
@@ -34,14 +34,12 @@ export default function AddClient() {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        const client ={
-            "name": values.clientName,
-            "email": values.clientEmail,
-            "address": values.clientAddress,
-            "phone": values.clientPhone
+        const piece ={
+            "name": values.pieceName,
+            "price": values.piecePrice
         };
 
-        axios.post('http://localhost:8000/client', client)
+        axios.post('http://localhost:8000/piece', piece)
             .then(response => {
                 if (response.data !== null) {
                     window.location.reload(false)
@@ -57,10 +55,10 @@ export default function AddClient() {
         errors,
         handleChange,
         handleSubmit,
-    } = useForm(onSubmit, validate);
+    } = useForm(null, validate);
 
 
-    return (
+    return(
         <Container component="main" maxWidth="xs" className={"add-client"}>
             <CssBaseline/>
             <div>
@@ -72,17 +70,17 @@ export default function AddClient() {
                             margin="normal"
                             required
                             fullWidth
-                            id="clientPhone"
-                            label="Numéro de téléphone"
-                            name="clientPhone"
-                            autoComplete="clientPhone"
+                            id="pieceName"
+                            label="Nom pièce"
+                            name="pieceName"
+                            autoComplete="pieceName"
                             autoFocus
                             type={"name"}
                             onChange={handleChange}
-                            value={values.clientPhone || ''}
+                            value={values.pieceName || ''}
                         />
-                        {errors.clientPhone && (
-                            <p className="help is-danger">{errors.clientPhone}</p>
+                        {errors.pieceName && (
+                            <p className="help is-danger">{errors.pieceName}</p>
                         )}
                     </div>
                     <div className="control">
@@ -92,54 +90,16 @@ export default function AddClient() {
                             margin="normal"
                             required
                             fullWidth
-                            id="clientEmail"
-                            label="Adresse Email"
-                            name="clientEmail"
-                            autoComplete="clientEmail"
+                            id="piecePrice"
+                            label="Prix pièce"
+                            name="piecePrice"
+                            autoComplete="piecePrice"
                             type={"name"}
                             onChange={handleChange}
-                            value={values.clientEmail || ''}
+                            value={values.piecePrice || ''}
                         />
-                        {errors.clientEmail && (
-                            <p className="help is-danger">{errors.clientEmail}</p>
-                        )}
-                    </div>
-                    <div className="control">
-                        <TextField
-                            className={`input`}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="clientAddress"
-                            label="Adresse"
-                            name="clientAddress"
-                            autoComplete="clientAddress"
-                            type={"name"}
-                            onChange={handleChange}
-                            value={values.clientAddress || ''}
-                        />
-                        {errors.clientAddress && (
-                            <p className="help is-danger">{errors.clientAddress}</p>
-                        )}
-                    </div>
-                    <div className="control">
-                        <TextField
-                            className={`input`}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="clientName"
-                            label="Nom entreprise"
-                            name="clientName"
-                            autoComplete="clientName"
-                            type={"name"}
-                            onChange={handleChange}
-                            value={values.clientName || ''}
-                        />
-                        {errors.clientName && (
-                            <p className="help is-danger">{errors.clientName}</p>
+                        {errors.piecePrice && (
+                            <p className="help is-danger">{errors.piecePrice}</p>
                         )}
                     </div>
                     <Button
@@ -149,7 +109,7 @@ export default function AddClient() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Ajouter le client
+                        Ajouter une pièce
                     </Button>
                 </form>
             </div>

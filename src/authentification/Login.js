@@ -7,13 +7,16 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import useForm from "../assets/useForm";
 import validate from '../assets/LoginFormValidationRules';
 import {useAuth} from '../UserContext';
+import {useHistory} from "react-router-dom";
 
 function Login(props) {
     const auth = useAuth();
+    const [code, setCode] = useState('');
+    const history = useHistory();
 
     const useStyles = makeStyles((theme) => ({
         paper: {
@@ -48,13 +51,34 @@ function Login(props) {
         props.setEmail(values.email);
         props.setPassword(values.password);
         props.setIsIdentified(true)
+        props.setType('login');
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        let bodyFormData = new FormData();
+        bodyFormData.append('username', values.email);
+        bodyFormData.append('password', values.password);
+        bodyFormData.append('totp_token', code);
+        axios.post('http://localhost:8000/token', bodyFormData)
+            .then(response => {
+                if(response.data.access_token !== null){
+                    localStorage.setItem('user_token', response.data.access_token);
+                    window.location.reload(false)
+                }
+            })
+            .catch(error => {
+                console.log(error.response)
+            });
+        //auth.signin(props.email, props.password);
+        //auth.signin(values.email, values.password);
     };
 
     const {
         values,
         errors,
         handleChange,
-        handleSubmit,
     } = useForm(verifyCredentials, validate);
 
     const classes = useStyles();
@@ -69,7 +93,7 @@ function Login(props) {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <form className={classes.form} noValidate onSubmit={onSubmit}>
                     <div className="control">
                         <TextField
                             className={`input ${errors.email && 'is-danger'}`}
@@ -108,6 +132,17 @@ function Login(props) {
                             <p className="help is-danger">{errors.password}</p>
                         )}
                     </div>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="code"
+                            label="Please enter the code from your authentication app"
+                            type="text"
+                            id="code"
+                            onChange={(e) => setCode(e.currentTarget.value || null)}
+                        />
                     <Button
                         type="submit"
                         fullWidth

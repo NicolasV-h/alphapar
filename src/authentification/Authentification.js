@@ -10,6 +10,8 @@ export default function Authentification(props) {
     const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [type, setType] = useState('');
+    const [urlQRCode, setUrlQRCode] = useState('');
 
     useEffect(() => {
         if (isIdentified) {
@@ -20,13 +22,13 @@ export default function Authentification(props) {
         <>
             <Switch>
                 <Route path={'/authentification'} exact>
-                    <Login setIsIdentified={setIsIdentified} setEmail={setEmail} setPassword={setPassword}/>
+                    <Login setIsIdentified={setIsIdentified} setEmail={setEmail} setPassword={setPassword} setType={setType}/>
                 </Route>
                 <Route path={"/authentification/OtpVerification"}>
-                    <OtpVerification setIsLoggedIn={setIsLoggedIn} password={password} email={email}/>
+                    <OtpVerification setIsLoggedIn={setIsLoggedIn} password={password} email={email} type={type} urlQRCode={urlQRCode}/>
                 </Route>
                 <Route path={"/authentification/register"}>
-                    <Register/>
+                    <Register setType={setType} setIsIdentified={setIsIdentified} setUrlQRCode={setUrlQRCode} setPassword={setPassword} setEmail={setEmail}/>
                 </Route>
             </Switch>
         </>

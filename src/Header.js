@@ -11,7 +11,7 @@ export default function Header() {
     const auth = useAuth();
 
     const IsLoggedIn = () => {
-        if(auth?.user === null){
+        if(localStorage.getItem("user_token") === null){
             return (
                 <NavLink to="/authentification" className={"nav-link"}>Log in</NavLink>
             );
@@ -22,7 +22,7 @@ export default function Header() {
                 </NavLink>
             );
         }
-    }
+    };
 
     return (
         <Navbar expand="lg">

@@ -59,6 +59,7 @@ function useProvideAuth(props) {
 
     const signout = (e) => {
         localStorage.removeItem('user_token');
+        console.log(localStorage.getItem("user_token"))
         setUser(false);
         window.location.reload(false)
     };

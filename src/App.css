@@ -131,3 +131,82 @@ nav img{
 .add-client{
   transition: all .5s;
 }
+
+.invoice-container{
+  box-shadow: rgb(130,130,130) 1px 1px 3px;
+  width: 80%;
+  margin:  20px 10% 20px 10%;
+}
+
+.order-container{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #2bbbad;
+  border-radius: 20px;
+  margin: 10px;
+  height: auto;
+  max-width: 500px;
+  min-width: 300px;
+  color: white;
+}
+
+.order-container > div:first-child{
+  background-color: white;
+  width: 75%;
+  border-radius: 20px;
+  color: black;
+  box-shadow: rgb(130,130,130) 1px 1px 3px;
+}
+
+.order-container button{
+  display: block;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: white;
+  width: 200px;
+  height: 40px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-size: 100% 100%;
+  margin-bottom: 15px;
+  color: #2bbbad;
+}
+
+
+.plan-container{
+  background-color: white;
+  color: black;
+  max-width: 200px;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 20px;
+}
+
+.piece-container{
+  border: solid #2bbbad 1px;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.welcome-container{
+  position: absolute;
+  top: 70%;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  color: white;
+}
+
+.small-button{
+  height: 50px;
+  width: 50px;
+}
+
+.red{
+  background-color: red!important;
+}

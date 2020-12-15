@@ -1,6 +1,5 @@
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
-import {useState} from 'react';
 import useForm from "../assets/useForm";
 import validate from '../assets/LoginFormValidationRules';
 import {useAuth} from '../UserContext';
@@ -35,19 +34,40 @@ export default function Register(props) {
         },
     }));
 
-    const verifyCredentials = () => {
+    const verifyCredentials = (e) => {
+        e.preventDefault();
+        console.log("skusddku");
+        const user = {
+            "email": values.email, "password": values.password
+        };
 
-        /*axios.post('/api/users/login',
-            user)
-            .then(response => {
-                localStorage.setItem('user_token', response.data.access_token);
-                if (localStorage.user_token) {
-                    setUser(response.data.user);
+        axios.post('http://localhost:8000/register', user)
+            .then((response) => {
+                if(response.data !== null){
+                    props.setUrlQRCode(response.data.totp_url);
+                    props.setType('register');
+                    props.setIsIdentified(true);
+                    props.setPassword(values.password);
+                    props.setEmail(values.email);
                 }
-            })*/
-        props.setEmail(values.email);
-        props.setPassword(values.password);
-        props.setIsIdentified(true)
+                console.log(response)
+            }, (error) => {
+                console.log(error);
+            });
+        /*localStorage.setItem('user_token', response.data.access_token);
+        if (localStorage.user_token) {
+            setUser(response.data.user);
+        }*/
+        /*
+         props.setIsIdentified(true);
+         props.setType('register');*/
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        props.setType('register');
+        props.setIsIdentified(true);
+        //auth.signin(values.email, values.password);
     };
 
     const {
@@ -67,9 +87,9 @@ export default function Register(props) {
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    S'enregistrer
                 </Typography>
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <form className={classes.form} noValidate onSubmit={verifyCredentials}>
                     <div className="control">
                         <TextField
                             className={`input ${errors.email && 'is-danger'}`}
