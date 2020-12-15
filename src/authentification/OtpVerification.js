@@ -51,7 +51,7 @@ export default function OtpVerification(props){
             .then(response => {
                 if(response.data.access_token !== null){
                     localStorage.setItem('user_token', response.data.access_token);
-                    history.push('/')
+                    window.location.reload(false)
                 }
             })
             .catch(error => {

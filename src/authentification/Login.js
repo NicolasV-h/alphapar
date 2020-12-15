@@ -64,8 +64,8 @@ function Login(props) {
         axios.post('http://localhost:8000/token', bodyFormData)
             .then(response => {
                 if(response.data.access_token !== null){
-                    localStorage.setItem('user_token', response.data.access_token);
-                    window.location.reload(false)
+                    auth.signin(response.data.access_token);
+                    window.location.reload(false);
                 }
             })
             .catch(error => {

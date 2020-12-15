@@ -36,7 +36,6 @@ export default function Register(props) {
 
     const verifyCredentials = (e) => {
         e.preventDefault();
-        console.log("skusddku");
         const user = {
             "email": values.email, "password": values.password
         };
@@ -50,25 +49,12 @@ export default function Register(props) {
                     props.setPassword(values.password);
                     props.setEmail(values.email);
                 }
-                console.log(response)
             }, (error) => {
                 console.log(error);
             });
-        /*localStorage.setItem('user_token', response.data.access_token);
-        if (localStorage.user_token) {
-            setUser(response.data.user);
-        }*/
-        /*
-         props.setIsIdentified(true);
-         props.setType('register');*/
+
     };
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        props.setType('register');
-        props.setIsIdentified(true);
-        //auth.signin(values.email, values.password);
-    };
 
     const {
         values,
