@@ -117,7 +117,7 @@ export default function AddModule(props) {
 
         for (let i = 1; i < piecesNumber + 1; i++) {
             children.push(
-                <div className="control d-flex justify-content-between" key={['piecesNumber', i].join('_')}>
+                <div className="control d-flex justify-content-between align-items-center" key={['piecesNumber', i].join('_')}>
                     <FormControl className={classes.formControl + ' w-100'}>
                         <InputLabel id="demo-simple-select-label">Choisissez une pièce</InputLabel>
                         <Select

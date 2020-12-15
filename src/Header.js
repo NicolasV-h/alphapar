@@ -26,7 +26,9 @@ export default function Header() {
 
     return (
         <Navbar expand="lg">
-            <NavLink to="/" className={"nav-link"}><img src={logo} alt={"logo"}/></NavLink>
+            <div>
+                <NavLink to="/" style={{backgroundColor:"white"}} className={"nav-link"}><img src={logo} alt={"logo"}/></NavLink>
+            </div>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">

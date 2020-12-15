@@ -35,7 +35,7 @@ export default function Client() {
 
     const useStyles = makeStyles((theme) => ({
         avatar: {
-            backgroundColor: "#2bbbad",
+            backgroundColor: "#3F51B5",
             cursor: "pointer",
         }
     }));
@@ -59,7 +59,7 @@ export default function Client() {
                             <td>{client.email}</td>
                             <td>{client.phone}</td>
                             <td className={"d-flex justify-content-center"}>
-                                {<Avatar className={classes.avatar + ' mx-2'} onClick={() => {
+                                {<Avatar className={classes.avatar + ' mx-2 blue'} onClick={() => {
                                     setShowInvoice(true);
                                     setCurrentClient(client.id);
                                 }}>

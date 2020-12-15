@@ -1,8 +1,16 @@
+@font-face {
+  font-family: "MontSerrat";
+  /*src: url("src/assets/Montserrat-Medium.ttf")format("ttf")*/
+}
+
 .App {
   text-align: center;
+
 }
+
 body{
   height: 100vh;
+  /*font-family: "MontSerrat", Arial, serif;*/
 }
 #root, .App{
   height: 100%;
@@ -20,7 +28,7 @@ body{
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #3F51B5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -48,7 +56,9 @@ body{
 }
 
 nav{
-  background-color: #2bbbad;
+  background-color: #3F51B5;
+  padding:0!important;
+  box-shadow: rgb(130,130,130) 0px 2px 2px;
 }
 
 
@@ -66,10 +76,14 @@ nav img{
 }
 
 .home{
-  background: url("./assets/homeBackground.jpg") no-repeat center center fixed;
-  height: calc(100% - 100px);
-  filter: blur(3px);
+  background: url("./assets/homeBackground2.jpg") no-repeat center center fixed;
+  height: calc(100% - 80px);
+ /*filter: blur(3px);*/
   background-size: cover;
+}
+
+.home nav{
+  background-color: transparent!important;
 }
 
 .home > div {
@@ -106,7 +120,7 @@ nav img{
   cursor: pointer;
   outline: none;
   border: none;
-  background-color: #2bbbad;
+  background-color: #3F51B5;
   width: 250px;
   height: 70px;
   border-radius: 30px;
@@ -125,7 +139,7 @@ nav img{
 .homeButtons button:hover{
   transition: all .3s;
   background-color: transparent;
-  border: #2bbbad solid 2px;
+  border: #3F51B5 solid 2px;
 }
 
 .add-client{
@@ -203,10 +217,17 @@ nav img{
 }
 
 .small-button{
-  height: 50px;
-  width: 50px;
+  height: 50px!important;
+  width: 50px!important;
 }
 
 .red{
-  background-color: red!important;
+  background-color: #CC0000!important;
+  color: white!important;
+}
+
+
+.blue{
+  background-color: #3F51B5!important;
+  color: white!important;
 }

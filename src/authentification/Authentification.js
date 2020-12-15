@@ -14,6 +14,9 @@ export default function Authentification(props) {
     const [urlQRCode, setUrlQRCode] = useState('');
 
     useEffect(() => {
+        if(localStorage.getItem('user_token')){
+            history.push('/')
+        }
         if (isIdentified) {
             history.push('/authentification/OtpVerification')
         }
