@@ -68,6 +68,12 @@ export default function ModalAddOrder(props) {
     }));
 
     const classes = useStyles();
+    
+    const removePlan = (i) =>{
+        setPlansNumber(plansNumber - 1);
+        setModulePlanQuantity(modulePlanQuantity => modulePlanQuantity.filter((quantity, index) => i !== index));
+        setModulePlanName(modulePlanName => modulePlanName.filter((name, index) => i !== index));
+    };
 
     const ButtonAddModule = ({i}) => {
         if (plansNumber === i) {
@@ -93,7 +99,7 @@ export default function ModalAddOrder(props) {
                     variant="contained"
                     color="primary"
                     className={"small-button red px-2"}
-                    onClick={() => setPlansNumber(plansNumber - 1)}
+                    onClick={() => removePlan(i)}
                 >
                     -
                 </Button>

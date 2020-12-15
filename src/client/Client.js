@@ -54,7 +54,7 @@ export default function Client() {
             return (
                 clients?.map(client => (
                         <tr key={client.name}>
-                            <th scope="row" onClick={() => handleClientDetails(client)}>{client.name}</th>
+                            <th scope="row" style={{textDecoration:'underline', cursor:'pointer'}} onClick={() => handleClientDetails(client)}>{client.name}</th>
                             <td>{client.address}</td>
                             <td>{client.email}</td>
                             <td>{client.phone}</td>

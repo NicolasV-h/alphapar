@@ -5,9 +5,9 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import {makeStyles} from "@material-ui/core/styles";
 import useForm from "../assets/useForm";
-import validate from "../assets/LoginFormValidationRules";
+import validateAddMessage from "./validate/validateAddMessage";
 import axios from "axios";
-import {useHistory} from "react-router-dom";
+import {transformDate} from "../utils/utils";
 
 
 export default function AddMessage(props) {
@@ -21,7 +21,6 @@ export default function AddMessage(props) {
                     message.client_id === props.id
                 ))
             }).then(clientMessage => {
-            console.log(clientMessage)
             setMessages(clientMessage)
         })
             .catch(error => {
@@ -52,8 +51,7 @@ export default function AddMessage(props) {
 
     const classes = useStyles();
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = () => {
         const client = {
             "client_id": props.id,
             "content": values.clientMessage,
@@ -75,17 +73,16 @@ export default function AddMessage(props) {
         errors,
         handleChange,
         handleSubmit,
-    } = useForm(onSubmit, validate);
+    } = useForm(onSubmit, validateAddMessage);
 
 
     const Messages = () => {
-        console.log(messages)
         if (messages) {
             return (
                 messages?.map(message => (
                     <div key={message.id}>
                         <p>
-                            Envoyé le : {message.sent_at}
+                            Envoyé le : {transformDate(message.sent_at)}
                         </p>
                         <p>
                             {message.content}
@@ -101,7 +98,7 @@ export default function AddMessage(props) {
         <Container component="main" maxWidth="xs" className={"add-client"}>
             <CssBaseline/>
             <div>
-                <form className={classes.form} noValidate onSubmit={onSubmit}>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <div className="control">
                         <TextareaAutosize
                             className={`input`}

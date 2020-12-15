@@ -4,13 +4,12 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import {makeStyles} from "@material-ui/core/styles";
 import useForm from "../assets/useForm";
-import validate from "../assets/LoginFormValidationRules";
+import validateAddModule from "./validate/validateAddModule";
 import axios from "axios";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
-import {useHistory} from "react-router-dom";
 
 export default function AddModule(props) {
 
@@ -57,10 +56,7 @@ export default function AddModule(props) {
         )
     };
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-
-
+    const onSubmit = () => {
         const plans = {
             "name": values.planName,
             "pieces": []
@@ -78,6 +74,12 @@ export default function AddModule(props) {
             .catch(error => {
                 alert(error)
             });
+    };
+
+    const removePiece = (i) =>{
+        setPiecesNumber(piecesNumber - 1);
+        setModulePieceQuantity(modulePieceQuantity => modulePieceQuantity.filter((quantity, index) => i !== index));
+        setModulePieceName(modulePieceName => modulePieceName.filter((name, index) => i !== index));
     };
 
     const ButtonAddPiece = ({i}) => {
@@ -104,7 +106,7 @@ export default function AddModule(props) {
                     variant="contained"
                     color="primary"
                     className={"small-button red px-2"}
-                    onClick={() => setPiecesNumber(piecesNumber - 1)}
+                    onClick={() => removePiece(i)}
                 >
                     -
                 </Button>
@@ -144,9 +146,9 @@ export default function AddModule(props) {
                             margin="normal"
                             required
                             fullWidth
-                            id={"modulePieceQuantity"}
+                            id={"modulePieceQuantity" + i}
                             label="Quantité"
-                            name={"modulePieceQuantity"}
+                            name={"modulePieceQuantity" + i}
                             type={"text"}
                             onChange={(e) => handleChangeQuantity(e, i)}
                             value={modulePieceQuantity[i - 1] || ''}
@@ -165,12 +167,12 @@ export default function AddModule(props) {
         errors,
         handleChange,
         handleSubmit,
-    } = useForm(onSubmit, validate);
+    } = useForm(onSubmit, validateAddModule);
 
 
     return (
         <Container component="main" maxWidth="sm" className={"add-client"}>
-            <form className={classes.form} noValidate onSubmit={onSubmit}>
+            <form className={classes.form} noValidate onSubmit={handleSubmit}>
                 <div className="control">
                     <TextField
                         className={`input`}

@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import {makeStyles} from "@material-ui/core/styles";
 import useForm from "../assets/useForm";
-import validate from "../assets/LoginFormValidationRules";
+import validateAddClient from "./validate/validateAddClient";
 import axios from "axios";
 
 export default function AddClient() {
@@ -32,8 +32,7 @@ export default function AddClient() {
 
     const classes = useStyles();
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = () => {
         const client ={
             "name": values.clientName,
             "email": values.clientEmail,
@@ -57,14 +56,14 @@ export default function AddClient() {
         errors,
         handleChange,
         handleSubmit,
-    } = useForm(onSubmit, validate);
+    } = useForm(onSubmit, validateAddClient);
 
 
     return (
         <Container component="main" maxWidth="xs" className={"add-client"}>
             <CssBaseline/>
             <div>
-                <form className={classes.form} noValidate onSubmit={onSubmit}>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <div className="control">
                         <TextField
                             className={`input`}

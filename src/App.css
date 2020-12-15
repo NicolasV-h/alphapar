@@ -65,10 +65,12 @@ nav{
 .nav-link{
   color: white!important;
   text-decoration: none;
+  margin-right: 20px!important;
 }
 
 .active{
-  text-decoration: underline;
+  padding-bottom: 0px!important;
+  border-bottom: white solid 5px;
 }
 
 nav img{
@@ -136,6 +138,18 @@ nav img{
   font-size: 1.2rem;
 }
 
+.btn-basic-lg{
+  width: 250px;
+  height: 50px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-basic-lg:hover{
+  color:white;
+}
+
 .homeButtons button:hover{
   transition: all .3s;
   background-color: transparent;
@@ -157,12 +171,12 @@ nav img{
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: #2bbbad;
+  background-color: #3F51B5;
   border-radius: 20px;
   margin: 10px;
   height: auto;
-  max-width: 500px;
-  min-width: 300px;
+  max-width: 700px;
+  min-width: 400px;
   color: white;
 }
 
@@ -187,7 +201,7 @@ nav img{
   font-weight: 600;
   background-size: 100% 100%;
   margin-bottom: 15px;
-  color: #2bbbad;
+  color: #3F51B5;
 }
 
 
@@ -201,7 +215,7 @@ nav img{
 }
 
 .piece-container{
-  border: solid #2bbbad 1px;
+  border: solid #3F51B5 1px;
   border-radius: 10px;
   margin-top: 5px;
 }
@@ -231,3 +245,11 @@ nav img{
   background-color: #3F51B5!important;
   color: white!important;
 }
+
+.backgroundWhite {
+  background-color: white!important;
+}
+.backgroundWhite .nav-link{
+  color: #3F51B5!important;
+}
+

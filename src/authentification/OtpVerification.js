@@ -57,7 +57,6 @@ export default function OtpVerification(props){
             .catch(error => {
                 console.log(error.response)
             });
-        console.log("verifyUser")
         //auth.signin(props.email, props.password);
     };
 

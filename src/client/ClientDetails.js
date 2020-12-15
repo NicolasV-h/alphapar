@@ -3,6 +3,7 @@ import {useLocation, useHistory} from "react-router-dom";
 import AddMessage from "./AddMessage";
 import axios from "axios";
 import Test from "./Test";
+import {transformDate} from '../utils/utils';
 
 export default function ClientDetails(props) {
     const location = useLocation();
@@ -12,6 +13,7 @@ export default function ClientDetails(props) {
     const [invoices, setInvoices] = useState(null);
     const [plans, setPlans] = useState(null);
     const history = useHistory();
+
 
     useEffect(() => {
         if (!localStorage.getItem('user_token')) {
@@ -42,6 +44,7 @@ export default function ClientDetails(props) {
         }
     }, []);
 
+
     useEffect(()=>{
         if(orders){
             axios.get("http://localhost:8000/invoice")
@@ -58,6 +61,7 @@ export default function ClientDetails(props) {
                 });
         }
     }, [orders]);
+
 
     const payInvoice = (invoiceId) =>{
         const invoice = {
@@ -82,7 +86,7 @@ export default function ClientDetails(props) {
                 orders?.map((order, j) => (
                     props.order_id === order.id ? <div key={j + "order" + order.id} className={"order-container"}>
                         <div className={"my-2"}><span
-                            className={"font-weight-bold"}>Commandée le :</span> {order.created_at}</div>
+                            className={"font-weight-bold"}>Commandée le :</span> {transformDate(order.created_at)}</div>
                         <div className={"d-flex justify-content-center"}>
                             {toggledDiv !== props.invoice_id ?
                                 <button onClick={() => setToggledDiv(props.invoice_id)}>Détails</button> : null}
@@ -109,7 +113,7 @@ export default function ClientDetails(props) {
                     <div key={plan.id} className={"plan-container"}>
                         <p>Nom du plan : {plan.name}</p>
                         <p>Quantité : {props.currentOrder.plans[i].quantity}</p>
-                        <p>Prix : {props.currentOrder.plans[i].price}</p>
+                        <p>Prix : {props.currentOrder.plans[i].price} €</p>
                         <div className={'d-flex flex-column'}>
                             <h6>Pièce(s)</h6>
                             {plan.pieces.map((piece, i) =>
@@ -130,7 +134,7 @@ export default function ClientDetails(props) {
 
     const IsPaid = (props) =>{
         return (
-            props.paidAt ? <div>Payée le : {props.paidAt}</div> : <div className={'btn-basic btn-basic-sm'} onClick={() => payInvoice(props.invoiceId)}>Payer la facture</div>
+            props.paidAt ? <div>Payée le : {transformDate(props.paidAt)}</div> : <div className={'btn-basic btn-basic-sm'} onClick={() => payInvoice(props.invoiceId)}>Payer la facture</div>
         );
     };
 
@@ -158,13 +162,13 @@ export default function ClientDetails(props) {
             </div>
             {invoices ? invoices.map((invoice, i) => {
                     return (
-                        <div key={invoice.id} className={"invoice-container"}>
+                        <div key={invoice.id} className={"invoice-container p-2"}>
                             <h5>Facture {i + 1}</h5>
                             <div className={'d-flex justify-content-center'}>
                                 <Test invoice={invoice} orders={orders} plans={plans} orderId={invoice.order_id}/>
                             </div>
                             <IsPaid invoiceId={invoice.id} paidAt={invoice.paid_at}/>
-                            <div>Créée le : {invoice.created_at}</div>
+                            <div>Créée le : {transformDate(invoice.created_at)}</div>
                             <h5 className={"mt-5"}>Commandes</h5>
                             <div className={"d-flex justify-content-around"}>
                                 <Orders order_id={invoice.order_id} invoice_id={invoice.id}/>

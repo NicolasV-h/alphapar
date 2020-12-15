@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {Navbar, Nav} from 'react-bootstrap'
 import {
-    NavLink, useHistory
+    NavLink, useLocation
 } from "react-router-dom";
 import logo from './assets/logo.png';
 import {useAuth} from './UserContext';
@@ -9,15 +9,16 @@ import {useAuth} from './UserContext';
 
 export default function Header() {
     const auth = useAuth();
+    const location = useLocation();
 
     const IsLoggedIn = () => {
         if(localStorage.getItem("user_token") === null){
             return (
-                <NavLink to="/authentification" className={"nav-link"}>Log in</NavLink>
+                <NavLink to="/authentification" exact className={"nav-link"}>Log in</NavLink>
             );
         }else{
             return (
-                <NavLink className={"nav-link"} onClick={auth.signout} to={'/'}>
+                <NavLink className={"nav-link"} exact onClick={auth.signout} to={'/'}>
                 Logout
                 </NavLink>
             );
@@ -25,9 +26,9 @@ export default function Header() {
     };
 
     return (
-        <Navbar expand="lg">
+        <Navbar expand="lg" className={location.pathname === '/' ? 'backgroundWhite': ''}>
             <div>
-                <NavLink to="/" style={{backgroundColor:"white"}} className={"nav-link"}><img src={logo} alt={"logo"}/></NavLink>
+                <NavLink to="/" className={"nav-link"} style={{backgroundColor:'white'}}><img src={logo} alt={"logo"}/></NavLink>
             </div>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">

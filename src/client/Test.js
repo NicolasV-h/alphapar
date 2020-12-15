@@ -82,7 +82,7 @@ function Test(props) {
             <PDFDownloadLink document={<MyDoc invoice={props.invoice} orders={props.orders} plans={props.plans}
                                               orderId={props.orderId}/>}
                              fileName="exportFacture.pdf"
-                             className={"btn-basic btn-basic-sm my-3"}>
+                             className={"btn-basic btn-basic-lg my-3"}>
                 {({blob, url, loading, error}) => (loading ? 'Loading document...' : 'Exporter la facture en PDF')}
             </PDFDownloadLink>
         </div>

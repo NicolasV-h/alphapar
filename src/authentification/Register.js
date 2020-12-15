@@ -34,8 +34,7 @@ export default function Register(props) {
         },
     }));
 
-    const verifyCredentials = (e) => {
-        e.preventDefault();
+    const verifyCredentials = () => {
         const user = {
             "email": values.email, "password": values.password
         };
@@ -75,7 +74,7 @@ export default function Register(props) {
                 <Typography component="h1" variant="h5">
                     S'enregistrer
                 </Typography>
-                <form className={classes.form} noValidate onSubmit={verifyCredentials}>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <div className="control">
                         <TextField
                             className={`input ${errors.email && 'is-danger'}`}

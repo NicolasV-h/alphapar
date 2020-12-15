@@ -50,7 +50,7 @@ function Module() {
                     <tr key={plan.id}>
                         <th scope="row">{plan.name}</th>
                         <td>{plan.pieces.map(e => e.name + ' (' + e.quantity +')').join(', ')}</td>
-                        <td>{plan.pieces.reduce(function (acc, obj) { return acc + obj.unit_price; }, 0)}</td>
+                        <td>{plan.pieces.reduce(function (acc, obj) { return acc + (obj.unit_price*obj.quantity); }, 0)}</td>
                     </tr>
                 ) : null}
                 </tbody>

@@ -38,24 +38,8 @@ function Login(props) {
         },
     }));
 
+
     const verifyCredentials = () => {
-
-        /*axios.post('/api/users/login',
-            user)
-            .then(response => {
-                localStorage.setItem('user_token', response.data.access_token);
-                if (localStorage.user_token) {
-                    setUser(response.data.user);
-                }
-            })*/
-        props.setEmail(values.email);
-        props.setPassword(values.password);
-        props.setIsIdentified(true)
-        props.setType('login');
-    };
-
-    const onSubmit = (e) => {
-        e.preventDefault();
 
         let bodyFormData = new FormData();
         bodyFormData.append('username', values.email);
@@ -71,14 +55,13 @@ function Login(props) {
             .catch(error => {
                 console.log(error.response)
             });
-        //auth.signin(props.email, props.password);
-        //auth.signin(values.email, values.password);
     };
 
     const {
         values,
         errors,
         handleChange,
+        handleSubmit
     } = useForm(verifyCredentials, validate);
 
     const classes = useStyles();
@@ -93,7 +76,7 @@ function Login(props) {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form className={classes.form} noValidate onSubmit={onSubmit}>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <div className="control">
                         <TextField
                             className={`input ${errors.email && 'is-danger'}`}

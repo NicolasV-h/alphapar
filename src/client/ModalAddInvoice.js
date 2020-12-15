@@ -33,7 +33,6 @@ export default function ModalAddInvoice(props) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(orderId);
         const invoice = {
             "order_id": orderId,
             "paid": isOrderPaid,

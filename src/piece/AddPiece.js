@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import {makeStyles} from "@material-ui/core/styles";
 import useForm from "../assets/useForm";
-import validate from "../assets/LoginFormValidationRules";
+import validateAddPiece from "./validate/validateAddPiece";
 import axios from "axios";
 
 export default function AddPiece(){
@@ -32,8 +32,7 @@ export default function AddPiece(){
 
     const classes = useStyles();
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = () => {
         const piece ={
             "name": values.pieceName,
             "price": values.piecePrice
@@ -55,14 +54,14 @@ export default function AddPiece(){
         errors,
         handleChange,
         handleSubmit,
-    } = useForm(null, validate);
+    } = useForm(onSubmit, validateAddPiece);
 
 
     return(
         <Container component="main" maxWidth="xs" className={"add-client"}>
             <CssBaseline/>
             <div>
-                <form className={classes.form} noValidate onSubmit={onSubmit}>
+                <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <div className="control">
                         <TextField
                             className={`input`}
