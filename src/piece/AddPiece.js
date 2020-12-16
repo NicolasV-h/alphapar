@@ -38,7 +38,7 @@ export default function AddPiece(){
             "price": values.piecePrice
         };
 
-        axios.post('http://localhost:8000/piece', piece)
+        axios.post('https://web.pierrehamel/piece', piece)
             .then(response => {
                 if (response.data !== null) {
                     window.location.reload(false)

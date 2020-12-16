@@ -19,7 +19,7 @@ export default function ClientDetails(props) {
         if (!localStorage.getItem('user_token')) {
             history.push('/authentification')
         } else {
-            axios.get("http://localhost:8000/order")
+            axios.get("https://web.pierrehamel/order")
                 .then(response => {
                     return response.data.filter((order) => (
                         order.client_id === location.state.client.id
@@ -33,7 +33,7 @@ export default function ClientDetails(props) {
                 });
 
 
-            axios.get("http://localhost:8000/plan")
+            axios.get("https://web.pierrehamel/plan")
                 .then(response => {
                         setPlans(response.data)
                     }
@@ -47,7 +47,7 @@ export default function ClientDetails(props) {
 
     useEffect(()=>{
         if(orders){
-            axios.get("http://localhost:8000/invoice")
+            axios.get("https://web.pierrehamel/invoice")
                 .then(response => {
                     return response.data.filter(invoice =>{
                         return (orders.map(current => current.id).includes(invoice.order_id))
@@ -68,7 +68,7 @@ export default function ClientDetails(props) {
             "invoice_id": invoiceId,
             "paid": true
         };
-        axios.put('http://localhost:8000/invoice', invoice)
+        axios.put('https://web.pierrehamel/invoice', invoice)
             .then(response => {
                 if (response.data !== null) {
                     window.location.reload(false)

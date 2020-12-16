@@ -15,7 +15,7 @@ export default function AddMessage(props) {
     const [messages, setMessages] = useState(null);
 
     useEffect(() => {
-        axios.get("http://localhost:8000/message")
+        axios.get("https://web.pierrehamel/message")
             .then(response => {
                 return response.data.filter((message) => (
                     message.client_id === props.id
@@ -57,7 +57,7 @@ export default function AddMessage(props) {
             "content": values.clientMessage,
         };
 
-        axios.post('http://localhost:8000/message', client)
+        axios.post('https://web.pierrehamel/message', client)
             .then(response => {
                 if (response.data !== null) {
                     window.location.reload(false)

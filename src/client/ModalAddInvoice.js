@@ -18,7 +18,7 @@ export default function ModalAddInvoice(props) {
     const [isOrderPaid, setIsOrderPaid] = useState("0");
 
     useEffect(() => {
-        axios.get("http://localhost:8000/order")
+        axios.get("https://web.pierrehamel/order")
             .then(response => {
                 return response.data.filter((order) => (
                     order.client_id === props.id
@@ -38,7 +38,7 @@ export default function ModalAddInvoice(props) {
             "paid": isOrderPaid,
         };
 
-        axios.post('http://localhost:8000/invoice', invoice)
+        axios.post('https://web.pierrehamel/invoice', invoice)
             .then(response => {
                 if (response.data !== null) {
                     window.location.reload(false)

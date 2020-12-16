@@ -6,7 +6,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import {makeStyles} from "@material-ui/core/styles";
 import ModalAddInvoice from "./ModalAddInvoice";
 import DescriptionIcon from '@material-ui/icons/Description';
-import axios from "axios";
+import * as axios from "../utils/api";
 import ModalAddOrder from "./ModalAddOrder";
 
 export default function Client() {
@@ -24,7 +24,7 @@ export default function Client() {
         if (!localStorage.getItem('user_token')) {
             history.push('/authentification')
         } else {
-            axios.get('http://localhost:8000/client')
+            axios.get('https://web.pierrehamel/client')
                 .then((response) => {
                     setClients(response.data);
                 }).catch(response => {

@@ -79,7 +79,7 @@ nav img{
 
 .home{
   background: url("./assets/homeBackground2.jpg") no-repeat center center fixed;
-  height: calc(100% - 80px);
+  height: calc(100% - 78px);
  /*filter: blur(3px);*/
   background-size: cover;
 }

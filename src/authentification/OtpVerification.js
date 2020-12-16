@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import {makeStyles} from "@material-ui/core/styles";
 import {useHistory} from "react-router-dom";
 import {useAuth} from "../UserContext";
-import axios from "axios";
+import "../utils/api";
 
 export default function OtpVerification(props){
 
@@ -47,7 +47,7 @@ export default function OtpVerification(props){
         bodyFormData.append('username', props.email);
         bodyFormData.append('password', props.password);
         bodyFormData.append('totp_token', code);
-        axios.post('http://localhost:8000/token', bodyFormData)
+        axios.post('https://web.pierrehamel/token', bodyFormData)
             .then(response => {
                 if(response.data.access_token !== null){
                     localStorage.setItem('user_token', response.data.access_token);
@@ -80,7 +80,7 @@ export default function OtpVerification(props){
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Sign Up
                     </Typography>
                     <form className={classes.form} noValidate onSubmit={verifyUser}>
                         <TextField
@@ -102,7 +102,7 @@ export default function OtpVerification(props){
                             className={classes.submit}
                             onClick={verifyUser}
                         >
-                            Sign In
+                            Sign Up
                         </Button>
                     </form>
                 </div>

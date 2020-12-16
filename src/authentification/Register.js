@@ -1,5 +1,5 @@
 import Container from '@material-ui/core/Container';
-import axios from 'axios';
+import "../utils/api";
 import useForm from "../assets/useForm";
 import validate from '../assets/LoginFormValidationRules';
 import {useAuth} from '../UserContext';
@@ -39,7 +39,7 @@ export default function Register(props) {
             "email": values.email, "password": values.password
         };
 
-        axios.post('http://localhost:8000/register', user)
+        axios.post('https://web.pierrehamel/register', user)
             .then((response) => {
                 if(response.data !== null){
                     props.setUrlQRCode(response.data.totp_url);

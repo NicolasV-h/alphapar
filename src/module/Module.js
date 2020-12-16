@@ -13,13 +13,13 @@ function Module() {
         if (!localStorage.getItem('user_token')) {
             history.push('/authentification')
         } else {
-            axios.get('http://localhost:8000/piece')
+            axios.get('https://web.pierrehamel/piece')
                 .then((response) => {
                     setPieces(response.data);
                 }).catch(response => {
                 alert(response);
             });
-            axios.get('http://localhost:8000/plan')
+            axios.get('https://web.pierrehamel/plan')
                 .then((response) => {
                     console.log(response.data)
                     setPlans(response.data);

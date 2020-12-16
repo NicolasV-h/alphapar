@@ -17,7 +17,7 @@ export default function ModalAddOrder(props) {
     const children = [];
 
     useEffect(() => {
-        axios.get('http://localhost:8000/plan')
+        axios.get('https://web.pierrehamel/plan')
             .then((response) => {
                 setModules(response.data);
             }).catch(response => {
@@ -36,7 +36,7 @@ export default function ModalAddOrder(props) {
             order.plans.push({'plan_id': item, 'quantity': parseInt(modulePlanQuantity[i])});
         });
 
-        axios.post('http://localhost:8000/order', order)
+        axios.post('https://web.pierrehamel/order', order)
             .then(response => {
                 if (response.data !== null) {
                     window.location.reload(false)

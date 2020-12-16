@@ -6,7 +6,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import axios from 'axios';
+import "../utils/api";
 import React, {useState} from 'react';
 import useForm from "../assets/useForm";
 import validate from '../assets/LoginFormValidationRules';
@@ -45,7 +45,7 @@ function Login(props) {
         bodyFormData.append('username', values.email);
         bodyFormData.append('password', values.password);
         bodyFormData.append('totp_token', code);
-        axios.post('http://localhost:8000/token', bodyFormData)
+        axios.post('https://web.pierrehamel/token', bodyFormData)
             .then(response => {
                 if(response.data.access_token !== null){
                     auth.signin(response.data.access_token);
