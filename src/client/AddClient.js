@@ -40,7 +40,7 @@ export default function AddClient() {
             "phone": values.clientPhone
         };
 
-        axios.post('https://web.pierrehamel/client', client)
+        axios.post('/client', client)
             .then(response => {
                 if (response.data !== null) {
                     window.location.reload(false)

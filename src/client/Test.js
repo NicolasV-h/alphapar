@@ -65,7 +65,6 @@ const MyDoc = (props) => (
                                 <Text>Créer le : {order.created_at}{"\n"}</Text>
                                 <ToggleOrderDetails plans={props.plans} currentOrder={order}/>
                             </Text> : null
-
                         )
                     }) : null
                 }

@@ -65,7 +65,7 @@ export default function AddModule(props) {
             plans.pieces.push({'piece_id': item, 'quantity': parseInt(modulePieceQuantity[i])});
         });
 
-        axios.post('https://web.pierrehamel/plan', plans)
+        axios.post('/plan', plans)
             .then(response => {
                 if (response.data !== null) {
                     window.location.reload(false)

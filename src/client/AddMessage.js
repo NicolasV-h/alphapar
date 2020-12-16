@@ -9,13 +9,12 @@ import validateAddMessage from "./validate/validateAddMessage";
 import axios from "axios";
 import {transformDate} from "../utils/utils";
 
-
 export default function AddMessage(props) {
 
     const [messages, setMessages] = useState(null);
 
     useEffect(() => {
-        axios.get("https://web.pierrehamel/message")
+        axios.get("/message")
             .then(response => {
                 return response.data.filter((message) => (
                     message.client_id === props.id
@@ -24,7 +23,7 @@ export default function AddMessage(props) {
             setMessages(clientMessage)
         })
             .catch(error => {
-                console.log(error)
+                console.log('erreur, veuillez contacter Bigoune')
             });
 
     }, []);
@@ -57,7 +56,7 @@ export default function AddMessage(props) {
             "content": values.clientMessage,
         };
 
-        axios.post('https://web.pierrehamel/message', client)
+        axios.post('/message', client)
             .then(response => {
                 if (response.data !== null) {
                     window.location.reload(false)
@@ -76,59 +75,61 @@ export default function AddMessage(props) {
     } = useForm(onSubmit, validateAddMessage);
 
 
+
     const Messages = () => {
         if (messages) {
             return (
-                messages?.map(message => (
+                <div className={'d-flex align-items-start flex-column'}>
+                    {messages?.map(message => (
                     <div key={message.id}>
                         <p>
                             Envoyé le : {transformDate(message.sent_at)}
                         </p>
-                        <p>
+                        <p style={{textAlign:'left'}}>
                             {message.content}
                         </p>
                     </div>
-                ))
+                    ))}
+                </div>
             )
         }
         return false;
     };
 
     return (
-        <Container component="main" maxWidth="xs" className={"add-client"}>
+        <Container component="main" maxWidth="xs" className={"add-client chat-container"}>
             <CssBaseline/>
-            <div>
-                <form className={classes.form} noValidate onSubmit={handleSubmit}>
-                    <div className="control">
-                        <TextareaAutosize
-                            className={`input`}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            id="clientMessage"
-                            label="Message"
-                            name="clientMessage"
-                            autoComplete="clientMessage"
-                            autoFocus
-                            type={"textarea"}
-                            onChange={handleChange}
-                        />
-                        {errors.clientMessage && (
-                            <p className="help is-danger">{errors.clientMessage}</p>
-                        )}
-                    </div>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Envoyer le message
-                    </Button>
-                </form>
-                <Messages/>
-            </div>
+            <form className={classes.form} noValidate onSubmit={handleSubmit}>
+                <div className="control">
+                    <TextareaAutosize
+                        className={`input form-control`}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        id="clientMessage"
+                        label="Message"
+                        name="clientMessage"
+                        autoComplete="clientMessage"
+                        autoFocus
+                        type={"textarea"}
+                        onChange={handleChange}
+                        placeholder={'Message'}
+                    />
+                    {errors.clientMessage && (
+                        <p className="help is-danger">{errors.clientMessage}</p>
+                    )}
+                </div>
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                >
+                    Envoyer le message
+                </Button>
+            </form>
+            <Messages/>
         </Container>
     );
 }

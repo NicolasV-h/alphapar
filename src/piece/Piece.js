@@ -14,7 +14,7 @@ export default function Piece() {
         if (!localStorage.getItem('user_token')) {
             history.push('/authentification')
         } else {
-            axios.get('https://web.pierrehamel/piece')
+            axios.get('/piece')
                 .then((response) => {
                     setPieces(response.data);
                 }).catch(response => {

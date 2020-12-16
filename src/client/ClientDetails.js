@@ -19,7 +19,7 @@ export default function ClientDetails(props) {
         if (!localStorage.getItem('user_token')) {
             history.push('/authentification')
         } else {
-            axios.get("https://web.pierrehamel/order")
+            axios.get("/order")
                 .then(response => {
                     return response.data.filter((order) => (
                         order.client_id === location.state.client.id
@@ -29,17 +29,17 @@ export default function ClientDetails(props) {
                 }
             )
                 .catch(error => {
-                    console.log(error)
+                    console.log('erreur, veuillez contacter Bigoune')
                 });
 
 
-            axios.get("https://web.pierrehamel/plan")
+            axios.get("/plan")
                 .then(response => {
                         setPlans(response.data)
                     }
                 )
                 .catch(error => {
-                    console.log(error)
+                    console.log('erreur, veuillez contacter Bigoune')
                 });
         }
     }, []);
@@ -47,17 +47,16 @@ export default function ClientDetails(props) {
 
     useEffect(()=>{
         if(orders){
-            axios.get("https://web.pierrehamel/invoice")
+            axios.get("/invoice")
                 .then(response => {
                     return response.data.filter(invoice =>{
-                        return (orders.map(current => current.id).includes(invoice.order_id))
-                        return false;
+                        return (orders.map(current => current.id).includes(invoice.order_id));
                     })
                 }).then(clientInvoice =>{
                 setInvoices(clientInvoice);
             })
                 .catch(error => {
-                    console.log(error)
+                    console.log('erreur, veuillez contacter Bigoune')
                 });
         }
     }, [orders]);
@@ -68,7 +67,7 @@ export default function ClientDetails(props) {
             "invoice_id": invoiceId,
             "paid": true
         };
-        axios.put('https://web.pierrehamel/invoice', invoice)
+        axios.put('/invoice', invoice)
             .then(response => {
                 if (response.data !== null) {
                     window.location.reload(false)
@@ -111,7 +110,7 @@ export default function ClientDetails(props) {
             return (
                 currentPlans.map((plan, i) =>
                     <div key={plan.id} className={"plan-container"}>
-                        <p>Nom du plan : {plan.name}</p>
+                        <p style={{fontWeight:'bold'}}>{plan.name}</p>
                         <p>Quantité : {props.currentOrder.plans[i].quantity}</p>
                         <p>Prix : {props.currentOrder.plans[i].price} €</p>
                         <div className={'d-flex flex-column'}>
@@ -141,7 +140,7 @@ export default function ClientDetails(props) {
     return (
         <>
             <h2>{location.state.client.name}</h2>
-            <div className={'d-flex flex-column align-items-start pl-2'}>
+            <div className={'d-flex flex-column align-items-center pl-2'}>
                 <p>
                     <span className={"font-weight-bold"}>Adresse : </span>{location.state.client.address}
                 </p>

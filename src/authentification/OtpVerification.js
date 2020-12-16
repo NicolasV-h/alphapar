@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import QRCode from "qrcode.react";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -8,16 +8,12 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {makeStyles} from "@material-ui/core/styles";
-import {useHistory} from "react-router-dom";
-import {useAuth} from "../UserContext";
-import "../utils/api";
+import axios from "axios";
 
 export default function OtpVerification(props){
 
-    const auth = useAuth();
     const [code, setCode] = useState('');
 
-    const history = useHistory();
     const useStyles = makeStyles((theme) => ({
         paper: {
             marginTop: theme.spacing(8),
@@ -47,7 +43,7 @@ export default function OtpVerification(props){
         bodyFormData.append('username', props.email);
         bodyFormData.append('password', props.password);
         bodyFormData.append('totp_token', code);
-        axios.post('https://web.pierrehamel/token', bodyFormData)
+        axios.post('/token', bodyFormData)
             .then(response => {
                 if(response.data.access_token !== null){
                     localStorage.setItem('user_token', response.data.access_token);
@@ -55,7 +51,7 @@ export default function OtpVerification(props){
                 }
             })
             .catch(error => {
-                console.log(error.response)
+                console.log('erreur, veuillez contacter bigoune')
             });
         //auth.signin(props.email, props.password);
     };
@@ -68,7 +64,7 @@ export default function OtpVerification(props){
         }else{
             return <></>
         }
-    }
+    };
 
     return (
         <div>

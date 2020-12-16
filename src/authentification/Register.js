@@ -1,5 +1,5 @@
 import Container from '@material-ui/core/Container';
-import "../utils/api";
+import axios from "axios";
 import useForm from "../assets/useForm";
 import validate from '../assets/LoginFormValidationRules';
 import {useAuth} from '../UserContext';
@@ -39,7 +39,7 @@ export default function Register(props) {
             "email": values.email, "password": values.password
         };
 
-        axios.post('https://web.pierrehamel/register', user)
+        axios.post('/register', user)
             .then((response) => {
                 if(response.data !== null){
                     props.setUrlQRCode(response.data.totp_url);
@@ -49,7 +49,7 @@ export default function Register(props) {
                     props.setEmail(values.email);
                 }
             }, (error) => {
-                console.log(error);
+                console.log('erreur, veuillez contacter Bigoune');
             });
 
     };

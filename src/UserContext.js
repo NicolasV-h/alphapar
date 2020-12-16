@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext, createContext} from "react";
-import "./utils/api";
 
+import axios from "axios";
 
 const authContext = createContext();
 
@@ -15,10 +15,8 @@ export const useAuth = () => {
 
 function useProvideAuth(props) {
     const [user, setUser] = useState(null);
-    const [token, setToken] = useState(null);
 
     const signin = (token) => {
-        setToken(token);
         localStorage.setItem('user_token', token);
 
         return true;
@@ -41,21 +39,6 @@ function useProvideAuth(props) {
         window.location.reload(false)
     };
 
-    useEffect(() => {
-        if(localStorage.user_token){
-            setUser({"email": "skuuu"});
-            /*
-            axios.get(axios.defaults.baseURL + 'api/users',
-                localStorage.user_token)
-                .then(response => {
-                    if (response.data) {
-                        setUser(response.data);
-                    } else {
-                        setUser(false);
-                    }
-                });*/
-        }
-    }, []);
 
     // Return the user object and auth methods
     return {

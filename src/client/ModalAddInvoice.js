@@ -13,12 +13,12 @@ import axios from "axios";
 export default function ModalAddInvoice(props) {
 
     const [orders, setOrders] = useState();
-    const [orderId, setOrderId] = useState(null);
+    const [orderId, setOrderId] = useState('');
 
     const [isOrderPaid, setIsOrderPaid] = useState("0");
 
     useEffect(() => {
-        axios.get("https://web.pierrehamel/order")
+        axios.get("/order")
             .then(response => {
                 return response.data.filter((order) => (
                     order.client_id === props.id
@@ -27,7 +27,7 @@ export default function ModalAddInvoice(props) {
             setOrders(ordersClient)
         })
             .catch(error => {
-                console.log(error)
+                console.log('erreur, veuillez contacter Bigoune')
             });
     }, []);
 
@@ -38,7 +38,7 @@ export default function ModalAddInvoice(props) {
             "paid": isOrderPaid,
         };
 
-        axios.post('https://web.pierrehamel/invoice', invoice)
+        axios.post('/invoice', invoice)
             .then(response => {
                 if (response.data !== null) {
                     window.location.reload(false)

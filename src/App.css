@@ -1,6 +1,6 @@
 @font-face {
   font-family: "MontSerrat";
-  /*src: url("src/assets/Montserrat-Medium.ttf")format("ttf")*/
+  src: url("../src/assets/Montserrat-Light.ttf")format("ttf")
 }
 
 .App {
@@ -10,7 +10,7 @@
 
 body{
   height: 100vh;
-  /*font-family: "MontSerrat", Arial, serif;*/
+  font-family: "MontSerrat", Arial, serif;
 }
 #root, .App{
   height: 100%;
@@ -145,6 +145,7 @@ nav img{
   display: flex;
   align-items: center;
   justify-content: center;
+  padding:3px;
 }
 .btn-basic-lg:hover{
   color:white;
@@ -215,9 +216,10 @@ nav img{
 }
 
 .piece-container{
-  border: solid #3F51B5 1px;
+  box-shadow: rgb(130,130,130) 1px 1px 2px;
   border-radius: 10px;
   margin-top: 5px;
+  padding: 5px;
 }
 
 .welcome-container{
@@ -253,3 +255,9 @@ nav img{
   color: #3F51B5!important;
 }
 
+
+.chat-container{
+  box-shadow: rgb(130,130,130) 1px 2px 4px;
+  min-width: 500px;
+  padding: 20px;
+}

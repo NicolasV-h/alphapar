@@ -13,9 +13,8 @@
     "bootstrap": "^4.5.3",
     "concurrently": "^5.3.0",
     "cross-env": "^7.0.3",
-    "electron": "^11.0.4",
-    "electron-builder": "^22.9.1",
     "electron-is-dev": "^1.2.0",
+    "electron-squirrel-startup": "^1.0.0",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "qrcode.react": "^1.0.0",
@@ -26,6 +25,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-slide-routes": "^0.14.0",
+    "react-transition-group": "^1.2.1",
     "wait-on": "^5.2.0",
     "web-vitals": "^0.2.4",
     "yarn": "^1.22.10"
@@ -38,7 +38,9 @@
     "electron-build": "electron-builder",
     "release": "yarn react-build && electron-builder --publish=always",
     "build": "yarn react-build && yarn electron-build",
-    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "eslintConfig": {
     "extends": [
@@ -64,5 +66,40 @@
     "appId": "Bigoune"
   },
   "main": "public/electron.js",
-  "homepage": "./"
+  "homepage": "./",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "electron": "^11.0.4"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "alphapar"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
 }
