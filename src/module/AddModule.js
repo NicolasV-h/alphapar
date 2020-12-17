@@ -62,7 +62,7 @@ export default function AddModule(props) {
             "pieces": []
         };
         modulePieceName.map((item, i) => {
-            plans.pieces.push({'piece_id': item, 'quantity': parseInt(modulePieceQuantity[i])});
+            return plans.pieces.push({'piece_id': item, 'quantity': parseInt(modulePieceQuantity[i])});
         });
 
         axios.post('/plan', plans)

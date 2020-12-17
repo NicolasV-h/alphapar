@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {useAuth} from "../UserContext";
 import {useHistory} from "react-router-dom";
 import AddPiece from "./AddPiece";
 import axios from "axios";

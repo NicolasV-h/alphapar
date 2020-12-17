@@ -63,7 +63,12 @@
   "description": "Bigoune",
   "author": "Bigoune",
   "build": {
-    "appId": "Bigoune"
+    "appId": "Bigoune",
+    "extends": null,
+    "files": [
+      "./build/**/*",
+      "./public/electron.js"
+    ]
   },
   "main": "public/electron.js",
   "homepage": "./",

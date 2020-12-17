@@ -33,7 +33,7 @@ export default function ModalAddOrder(props) {
             "plans": []
         };
         modulePlanName.map((item, i) => {
-            order.plans.push({'plan_id': item, 'quantity': parseInt(modulePlanQuantity[i])});
+            return order.plans.push({'plan_id': item, 'quantity': parseInt(modulePlanQuantity[i])});
         });
 
         axios.post('/order', order)
